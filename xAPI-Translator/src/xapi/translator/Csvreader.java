@@ -5,8 +5,8 @@
  */
 package xapi.translator;
 
-import com.opencsv.CSVReader;
 import com.opencsv.bean.CsvToBeanBuilder;
+import com.opencsv.bean.CsvToBeanFilter;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Iterator;
@@ -31,7 +31,7 @@ public class Csvreader {
 //        }
         
         List<Events> eventlist = new CsvToBeanBuilder(new FileReader(inputPath))
-        .withSeparator('\t').withType(Events.class).build().parse();
+        .withSeparator('\t').withFilter(new BlankRowsFilter()).withType(Events.class).build().parse();
         
 //        System.out.println(eventlist.get(3).eventname);
         int i = 0;
@@ -39,6 +39,17 @@ public class Csvreader {
         while(it.hasNext() && (i<20)) {
             it.next().getInfo();
             i++;
+        }
+    }
+    
+    /*
+    * OpenCSV Filter for skipping blank rows
+    */
+    private class BlankRowsFilter implements CsvToBeanFilter {
+        @Override
+        public boolean allowLine(String[] line) {
+            int colNum = line.length;
+            return (colNum != 1);
         }
     }
 }
