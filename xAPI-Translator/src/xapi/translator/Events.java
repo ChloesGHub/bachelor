@@ -16,21 +16,21 @@ public class Events {
     private String action;
     private String target;
     private String objecttable;
-    private int objectid;
+    private String objectid;
     private String crud;
-    private int edulevel;
-    private int contextid;
-    private int contextlevel;
-    private int contextinstanceid;
-    private int userid;
-    private int courseid;
-    private int relateduserid;
-    private int anonymous;
+    private String edulevel;
+    private String contextid;
+    private String contextlevel;
+    private String contextinstanceid;
+    private String userid;
+    private String courseid;
+    private String relateduserid;
+    private String anonymous;
     private String other;
     private String timecreated;
     private String origin;
     private String ip;
-    private int realuserid;
+    private String realuserid;
     //from userid csv
     private String username;
     
@@ -74,11 +74,11 @@ public class Events {
         this.objecttable = objecttable;
     }
 
-    public int getObjectid() {
+    public String getObjectid() {
         return objectid;
     }
 
-    public void setObjectid(int objectid) {
+    public void setObjectid(String objectid) {
         this.objectid = objectid;
     }
 
@@ -90,80 +90,67 @@ public class Events {
         this.crud = crud;
     }
 
-    public int getEdulevel() {
+    public String getEdulevel() {
         return edulevel;
     }
 
-    public void setEdulevel(int edulevel) {
+    public void setEdulevel(String edulevel) {
         this.edulevel = edulevel;
     }
 
-    public int getContextid() {
+    public String getContextid() {
         return contextid;
     }
 
-    public void setContextid(int contextid) {
+    public void setContextid(String contextid) {
         this.contextid = contextid;
     }
 
-    public int getContextlevel() {
+    public String getContextlevel() {
         return contextlevel;
     }
 
-    public void setContextlevel(int contextlevel) {
+    public void setContextlevel(String contextlevel) {
         this.contextlevel = contextlevel;
     }
 
-    public int getContextinstanceid() {
+    public String getContextinstanceid() {
         return contextinstanceid;
     }
 
-    public void setContextinstanceid(int contextinstanceid) {
+    public void setContextinstanceid(String contextinstanceid) {
         this.contextinstanceid = contextinstanceid;
     }
     
-    public int getUserid() {
+    public String getUserid() {
         return this.userid;
     }
     
-    public void setUserid(int userid) {
+    public void setUserid(String userid) {
         this.userid = userid;
     }
     
-    /**
-     * convert NULL Values of userids to 0
-     * @param userid 
-     */
-    public void setUserid(String userid) {
-        if ("NULL".equals(userid)) {
-            this.userid = 0;
-        }
-        else {
-            this.userid = Integer.parseInt(userid);
-        }
-    }
-    
-    public int getCourseid() {
+    public String getCourseid() {
         return this.courseid;
     }
     
-    public void setCourseID(int courseid) {
+    public void setCourseID(String courseid) {
         this.courseid = courseid;
     }
 
-    public int getRelateduserid() {
+    public String getRelateduserid() {
         return relateduserid;
     }
 
-    public void setRelateduserid(int relateduserid) {
+    public void setRelateduserid(String relateduserid) {
         this.relateduserid = relateduserid;
     }
 
-    public int getAnonymous() {
+    public String getAnonymous() {
         return anonymous;
     }
 
-    public void setAnonymous(int anonymous) {
+    public void setAnonymous(String anonymous) {
         this.anonymous = anonymous;
     }
 
@@ -199,11 +186,11 @@ public class Events {
         this.ip = ip;
     }
 
-    public int getRealuserid() {
+    public String getRealuserid() {
         return realuserid;
     }
 
-    public void setRealuserid(int realuserid) {
+    public void setRealuserid(String realuserid) {
         this.realuserid = realuserid;
     }
     
@@ -213,5 +200,31 @@ public class Events {
     
     public void setUsername(String username) {
         this.username = username;
+    }
+    
+    @Override
+    public String toString() {
+        return "Event [eventname: " + eventname +
+                      ", component: " + component +
+                      ", action: " + action +
+                      ", target: " + target +
+                      ", objecttable: " + objecttable +
+                      ", objectid: " + objectid	+
+                      ", crud: " + crud +
+                      ", edulevel: " + edulevel	+
+                      ", contextid: " + contextid +
+                      ", contextlevel: " + contextlevel	+
+                      ", contextinstanceid: " + contextinstanceid +
+                      ", userid: " + userid +
+                      ", courseid: " + courseid	+
+                      ", relateduserid: " + relateduserid +
+                      ", anonymous: " + anonymous +
+                      ", other: " + other +
+                      ", timecreated: " + timecreated +
+                      ", origin: " + origin +
+                      ", ip: " + ip +
+                      ", realuserid: " + realuserid +
+                      ", username: " + username
+                + "]";
     }
 }

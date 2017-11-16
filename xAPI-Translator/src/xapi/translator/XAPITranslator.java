@@ -5,7 +5,6 @@
  */
 package xapi.translator;
 
-import com.rusticisoftware.tincan.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
@@ -20,33 +19,15 @@ public class XAPITranslator {
      * @throws java.io.IOException
      */
     public static void main(String[] args) throws IOException, URISyntaxException {
-        String logcsvFilePath = "D:\\Bachelorarbeit\\Rohdaten\\log.csv";
+        String logcsvFilePath = "D:\\Bachelorarbeit\\Rohdaten\\log2.csv";
         String useridFilePath = "D:\\Bachelorarbeit\\Rohdaten\\userids2.csv";
+        String exportPath = "D:\\Bachelorarbeit\\Rohdaten\\xapi-sample.json";
         
         CSVLogsReader logreader = new CSVLogsReader(logcsvFilePath, useridFilePath);
-        logreader.parseFile();
-        
-        
-//        //setting test log event
-//        Events testevent = new Events();
-//        testevent.setUserid("testuser");
-//        testevent.setCourseID("testcourse");
-//        testevent.setAction("testaction");
-//        
-//        //setting test xAPI statement
-//        Agent agent = new Agent();
-//        agent.setName(testevent.getUserid());
-//        Verb verb = new Verb();
-//        verb.setId(testevent.getAction());
-//        Activity activity = new Activity();
-//        activity.setId(testevent.getCourseid());
-//        
-//        Statement st = new Statement();
-//        st.setActor(agent);
-//        st.setVerb(verb);
-//        st.setObject(activity);
-//        
-//        System.out.print(st.toJSON());
+        //logreader.parseFile();
+        StGenerator stGenerator = new StGenerator(exportPath);
+        stGenerator.generateStatements(logreader.parseFile());
+        stGenerator.exportToJson();
     }
     
 }
