@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package xapi.translator;
+package xapi.translator.mapping;
 
 /**
  *
  * @author chloe
  */
-public class User {
+public class MoodleUser {
     
     private String id;
     private String user;

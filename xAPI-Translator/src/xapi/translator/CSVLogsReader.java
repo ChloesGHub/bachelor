@@ -5,12 +5,14 @@
  */
 package xapi.translator;
 
+import xapi.translator.mapping.MoodleEvents;
+import xapi.translator.mapping.MoodleUser;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+import org.supercsv.cellprocessor.*;
 import org.supercsv.cellprocessor.constraint.NotNull;
 import org.supercsv.cellprocessor.ift.CellProcessor;
 import org.supercsv.io.CsvBeanReader;
@@ -45,7 +47,7 @@ public class CSVLogsReader {
         null, //relateduserid
         null, //anonymous
         null, //other
-        null, //timecreated
+        new Optional(new ParseLong()), //timecreated
         null, //origin
         null, //ip
         null, //realuserid
@@ -72,17 +74,17 @@ public class CSVLogsReader {
         String[] useridheader = useridReader.getHeader(true); //Headerline
         HashMap<String, String> userlist;
         userlist = new HashMap<>();
-        User user;
-        while((user = useridReader.read(User.class, useridheader, USERID_PROCESSOR)) != null ) {
+        MoodleUser user;
+        while((user = useridReader.read(MoodleUser.class, useridheader, USERID_PROCESSOR)) != null ) {
             userlist.put(user.getId(), user.getUser());
         }
         
         //parsing log.csv into eventlist POJO
         CsvBeanReader logReader = new CsvBeanReader(new FileReader(logcsvFilePath), CsvPreference.STANDARD_PREFERENCE); //CSVReader
         String[] logheader = logReader.getHeader(true); //Headerline
-        ArrayList<Events> eventlist = new ArrayList<>();
-        Events event;
-        while((event = logReader.read(Events.class, logheader, LOG_PROCESSOR)) != null ) {
+        ArrayList<MoodleEvents> eventlist = new ArrayList<>();
+        MoodleEvents event;
+        while((event = logReader.read(MoodleEvents.class, logheader, LOG_PROCESSOR)) != null ) {
             String userid = event.getUserid();
             if(userlist.containsKey(userid)) {
                 event.setUsername(userlist.get(userid));

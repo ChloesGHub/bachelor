@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package xapi.translator;
+package xapi.translator.mapping;
 
 /**
  *
  * @author chloe
  */
-public class Events {
+public class MoodleEvents {
     
     private String eventname;
     private String component;
@@ -27,7 +27,7 @@ public class Events {
     private String relateduserid;
     private String anonymous;
     private String other;
-    private String timecreated;
+    private long timecreated;
     private String origin;
     private String ip;
     private String realuserid;
@@ -162,11 +162,11 @@ public class Events {
         this.other = other;
     }
 
-    public String getTimecreated() {
+    public long getTimecreated() {
         return timecreated;
     }
 
-    public void setTimecreated(String timecreated) {
+    public void setTimecreated(long timecreated) {
         this.timecreated = timecreated;
     }
 
@@ -227,4 +227,11 @@ public class Events {
                       ", username: " + username
                 + "]";
     }
+    
+//    public String mapping() {
+//        
+//        public String 
+//        
+//        return;
+//    }
 }
