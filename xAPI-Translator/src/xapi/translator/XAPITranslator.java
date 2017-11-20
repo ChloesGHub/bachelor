@@ -24,13 +24,18 @@ public class XAPITranslator {
         String useridFilePath = "D:\\Bachelorarbeit\\Rohdaten\\userids2.csv";
         String verblistPath = "D:\\Bachelorarbeit\\Rohdaten\\verbs.json";
         String exportPath = "D:\\Bachelorarbeit\\Rohdaten\\xapi-sample.json";
+//        String jsonPath = "D:\\Bachelorarbeit\\Rohdaten\\april2.json";
         
+        //parsing moodlefiles
         CSVLogsReader logreader = new CSVLogsReader(logcsvFilePath, useridFilePath);
-        //logreader.parseFile();
         StGenerator stGenerator = new StGenerator(verblistPath, exportPath);
         stGenerator.init();
         stGenerator.generateStatements(logreader.parseFile());
         stGenerator.exportToJson();
+        
+        //parsing xapi(json) files
+//        XAPIReader xapireader = new XAPIReader(jsonPath);
+//        xapireader.parseFile();
     }
     
 }
