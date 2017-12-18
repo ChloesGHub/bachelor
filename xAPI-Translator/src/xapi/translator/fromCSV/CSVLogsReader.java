@@ -3,16 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package xapi.translator;
+package xapi.translator.fromCSV;
 
-import xapi.translator.mapping.MoodleEvents;
-import xapi.translator.mapping.MoodleUser;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import org.supercsv.cellprocessor.*;
 import org.supercsv.cellprocessor.constraint.NotNull;
 import org.supercsv.cellprocessor.ift.CellProcessor;
 import org.supercsv.io.CsvBeanReader;
@@ -47,7 +44,7 @@ public class CSVLogsReader {
         null, //relateduserid
         null, //anonymous
         null, //other
-        new Optional(new ParseLong()), //timecreated
+        null, //timecreated
         null, //origin
         null, //ip
         null, //realuserid

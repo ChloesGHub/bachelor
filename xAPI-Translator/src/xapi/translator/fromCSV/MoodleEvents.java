@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package xapi.translator.mapping;
+package xapi.translator.fromCSV;
 
 /**
  *
@@ -27,7 +27,7 @@ public class MoodleEvents {
     private String relateduserid;
     private String anonymous;
     private String other;
-    private long timecreated;
+    private String timecreated;
     private String origin;
     private String ip;
     private String realuserid;
@@ -162,11 +162,11 @@ public class MoodleEvents {
         this.other = other;
     }
 
-    public long getTimecreated() {
+    public String getTimecreated() {
         return timecreated;
     }
 
-    public void setTimecreated(long timecreated) {
+    public void setTimecreated(String timecreated) {
         this.timecreated = timecreated;
     }
 
@@ -201,37 +201,4 @@ public class MoodleEvents {
     public void setUsername(String username) {
         this.username = username;
     }
-    
-    @Override
-    public String toString() {
-        return "Event [eventname: " + eventname +
-                      ", component: " + component +
-                      ", action: " + action +
-                      ", target: " + target +
-                      ", objecttable: " + objecttable +
-                      ", objectid: " + objectid	+
-                      ", crud: " + crud +
-                      ", edulevel: " + edulevel	+
-                      ", contextid: " + contextid +
-                      ", contextlevel: " + contextlevel	+
-                      ", contextinstanceid: " + contextinstanceid +
-                      ", userid: " + userid +
-                      ", courseid: " + courseid	+
-                      ", relateduserid: " + relateduserid +
-                      ", anonymous: " + anonymous +
-                      ", other: " + other +
-                      ", timecreated: " + timecreated +
-                      ", origin: " + origin +
-                      ", ip: " + ip +
-                      ", realuserid: " + realuserid +
-                      ", username: " + username
-                + "]";
-    }
-    
-//    public String mapping() {
-//        
-//        public String 
-//        
-//        return;
-//    }
 }
