@@ -40,5 +40,7 @@ public class XAPITranslator {
         XAPIReader xapireader = new XAPIReader();
         xapireader.parseFile(jsonPath);
         xapireader.extract(actorList);
+    
+        System.out.println("testgit");
     }
 }
