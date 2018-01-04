@@ -1,0 +1,62 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 27.12.2017, 19:31:44
+    Author     : chloe
+*/
+
+.root {
+    
+}
+
+.mainTopBox {
+    -fx-min-height: 70;
+    -fx-pref-height: 70;
+    -fx-alignment: center-right;
+    -fx-padding: 0 15 0 0;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: darkgrey;
+}
+
+#appname {
+    -fx-font-size: 15pt;
+    -fx-font-weight: bold;
+    -fx-opacity: 0.8;
+}
+
+.menuVBox {
+    -fx-padding: 30 0 0 0;
+    -fx-border-width: 0 1 0 0;
+    -fx-border-color: darkgrey;
+}
+
+.menuVBox *.label {
+    -fx-min-width: 120;
+    -fx-min-height: 30;
+    -fx-padding: 0 20 0 20;
+    -fx-alignment: top-left;
+}
+
+.mainButtonBox {
+    -fx-pref-height: 75;
+    -fx-alignment: top-right;
+    -fx-padding: 15 15 0 0;
+    -fx-border-width: 1 0 0 0;
+    -fx-border-color: darkgrey;
+}
+
+.mainCenterBox {
+    -fx-pref-height: 500;
+    -fx-pref-width: 500;
+    -fx-min-height: 500;
+    -fx-min-width: 500;
+    -fx-padding: 30 0 0 20;
+}
+
+.mainCenterBox *.listviewer {
+    -fx-pref-height: 150;
+    -fx-pref-width: 200;
+}

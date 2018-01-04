@@ -5,7 +5,7 @@
  */
 package xapi.translator.maps;
 
-import com.google.gson.Gson;
+import java.util.Map;
 
 /**
  *
@@ -13,21 +13,48 @@ import com.google.gson.Gson;
  */
 public class XAPIStatement {
     private XAPIActor actor;
-    private XAPIObject object;
+    private XAPIVerb verb;
+    private Map object;
+    private Map context;
+    private String timestamp;
 
     public XAPIActor getActor() {
-        return actor;
+        return this.actor;
     }
 
     public void setActor(XAPIActor actor) {
         this.actor = actor;
     }
 
-    public XAPIObject getObject() {
-        return object;
+    public XAPIVerb getVerb() {
+        return this.verb;
     }
 
-    public void setObject(XAPIObject object) {
+    public void setVerb(XAPIVerb verb) {
+        this.verb = verb;
+    }
+
+    public Map getObject() {
+        return this.object;
+    }
+
+    public void setObject(Map object) {
         this.object = object;
+    }
+
+    public Map getContext() {
+        return this.context;
+    }
+
+    public void setContext(Map context) {
+        this.context = context;
+    }
+
+    public String getTimestamp() {
+        return this.timestamp;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
     }
 }

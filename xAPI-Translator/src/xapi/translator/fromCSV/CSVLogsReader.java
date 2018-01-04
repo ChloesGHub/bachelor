@@ -5,6 +5,7 @@
  */
 package xapi.translator.fromCSV;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -20,12 +21,6 @@ import org.supercsv.prefs.CsvPreference;
  * @author chloe
  */
 public class CSVLogsReader {
-    
-    //Filepath from log csv
-    private final String logcsvFilePath;
-    
-    //Filepath from userids csv
-    private final String useridsFilePath;
     
     private static final CellProcessor[] LOG_PROCESSOR = new CellProcessor[] {
         new NotNull(), //eventname
@@ -56,40 +51,48 @@ public class CSVLogsReader {
     };
     
     /**
-     * Constructor for parser
-     * @param logcsvFilePath
-     * @param useridsFilePath 
+     * parsing userid.csv into user hashmap POJO
+     * @param rawfile
+     * @return 
      */
-    public CSVLogsReader(String logcsvFilePath, String useridsFilePath) {
-        this.logcsvFilePath = logcsvFilePath;
-        this.useridsFilePath = useridsFilePath;
+    public HashMap parseUserIDFile(File rawfile) {
+        HashMap<String, String> usermap = new HashMap<>();
+        try {
+            CsvBeanReader useridReader = new CsvBeanReader(new FileReader(rawfile), CsvPreference.TAB_PREFERENCE); //CSVReader
+            String[] useridheader = useridReader.getHeader(true); //Headerline
+            MoodleUser user;
+            while((user = useridReader.read(MoodleUser.class, useridheader, USERID_PROCESSOR)) != null ) {
+                usermap.put(user.getId(), user.getUser());
+            }
+            return usermap;
+        } catch (FileNotFoundException ex) {
+            System.out.println("User ID file file not found -> parseUserIDFile() failed.");
+        } catch (IOException ex) {
+            System.out.println("IOException -> parseUserIDFile() failed.");
+        }
+        return usermap;
     }
     
-    public ArrayList parseFile() throws FileNotFoundException, IOException {
-        //parsing userid.csv into user hashmap POJO
-        CsvBeanReader useridReader = new CsvBeanReader(new FileReader(useridsFilePath), CsvPreference.TAB_PREFERENCE); //CSVReader
-        String[] useridheader = useridReader.getHeader(true); //Headerline
-        HashMap<String, String> userlist;
-        userlist = new HashMap<>();
-        MoodleUser user;
-        while((user = useridReader.read(MoodleUser.class, useridheader, USERID_PROCESSOR)) != null ) {
-            userlist.put(user.getId(), user.getUser());
-        }
-        
-        //parsing log.csv into eventlist POJO
-        CsvBeanReader logReader = new CsvBeanReader(new FileReader(logcsvFilePath), CsvPreference.STANDARD_PREFERENCE); //CSVReader
-        String[] logheader = logReader.getHeader(true); //Headerline
+    /**
+     * parsing log.csv into eventlist POJO
+     * @param rawfile
+     * @return 
+     */
+    public ArrayList parseLogFile(File rawfile) {
         ArrayList<MoodleEvents> eventlist = new ArrayList<>();
-        MoodleEvents event;
-        while((event = logReader.read(MoodleEvents.class, logheader, LOG_PROCESSOR)) != null ) {
-            String userid = event.getUserid();
-            if(userlist.containsKey(userid)) {
-                event.setUsername(userlist.get(userid));
+        try {
+            CsvBeanReader logReader = new CsvBeanReader(new FileReader(rawfile), CsvPreference.STANDARD_PREFERENCE); //CSVReader
+            String[] logheader = logReader.getHeader(true); //Headerline
+            MoodleEvents event;
+            while((event = logReader.read(MoodleEvents.class, logheader, LOG_PROCESSOR)) != null ) {
+                eventlist.add(event);
             }
-            eventlist.add(event);
-            //System.out.println(event);
+            System.out.println("Parsing from csv files completed.");
+        } catch (FileNotFoundException ex) {
+            System.out.println("Moodle log file not found -> parseLogFile() failed.");
+        } catch (IOException ex) {
+            System.out.println("IOException -> parseLogFile() failed.");
         }
-        System.out.println("Parsing from csv files completed.");
         return eventlist;
     }
 }

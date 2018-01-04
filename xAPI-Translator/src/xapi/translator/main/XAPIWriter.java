@@ -1,41 +1,39 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package xapi.translator.main;
 
-import com.rusticisoftware.tincan.Statement;
+import com.google.gson.Gson;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintStream;
+import java.io.Writer;
 import java.util.ArrayList;
+import xapi.translator.maps.XAPIStatement;
+import xapi.translator.maps.XAPIStatementList;
 
-/**
- *
- * @author chloe
- */
 public class XAPIWriter {
-    
-    
-    public void exportToJson(String exportPath, ArrayList<Statement> stList) {
+    public void exportToJson(String exportPath, XAPIStatementList stList) {
         BufferedWriter writer = null;
         try {
             writer = new BufferedWriter(new FileWriter(exportPath));
-        } catch (IOException ex) {
+        }
+        catch (IOException ex) {
             System.err.println("Starting export failed");
             ex.printStackTrace();
         }
         System.out.println("Generating Json File started");
-        for(Statement st : stList) {
+        Gson gson = new Gson();
+        int stcounter = 0;
+        for (XAPIStatement st : stList.getStatementList()) {
             try {
-                writer.write(st.toJSON());
+                writer.write(gson.toJson((Object)st));
                 writer.newLine();
-            } catch (IOException ex) {
+                ++stcounter;
+            }
+            catch (IOException ex) {
                 System.err.println("writing event failed");
                 ex.printStackTrace();
             }
         }
-        System.out.println("Json File erstellt.");
+        System.out.printf("Json file created. (%d statements created)/n", stcounter);
     }
 }

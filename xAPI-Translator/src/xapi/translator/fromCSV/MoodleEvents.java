@@ -5,6 +5,9 @@
  */
 package xapi.translator.fromCSV;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 /**
  *
  * @author chloe
@@ -200,5 +203,30 @@ public class MoodleEvents {
     
     public void setUsername(String username) {
         this.username = username;
+    }
+    
+    public Map toExtension() {
+        LinkedHashMap<String, String> map = new LinkedHashMap<String, String>();
+        map.put("eventname", this.eventname);
+        map.put("component", this.component);
+        map.put("action", this.action);
+        map.put("target", this.target);
+        map.put("objecttable", this.objecttable);
+        map.put("objectid", this.objectid);
+        map.put("crud", this.crud);
+        map.put("edulevel", this.edulevel);
+        map.put("contextid", this.contextid);
+        map.put("contextlevel", this.contextlevel);
+        map.put("contextinstanceid", this.contextinstanceid);
+        map.put("userid", this.userid);
+        map.put("courseid", this.courseid);
+        map.put("relateduserid", this.relateduserid);
+        map.put("anonymous", this.anonymous);
+        map.put("other", this.other);
+        map.put("timecreated", this.timecreated);
+        map.put("origin", this.origin);
+        map.put("ip", this.ip);
+        map.put("realuserid", this.realuserid);
+        return map;
     }
 }
