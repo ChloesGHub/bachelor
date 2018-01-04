@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package xapi.translator.fromCSV;
 
 import java.io.File;
@@ -16,19 +11,35 @@ import xapi.translator.maps.XAPIStatementList;
 import xapi.translator.maps.XAPIVerbList;
 
 /**
- *
- * @author chloe
+ * Class for handling Moodle events
+ * @author Chloe Lao <chloe@jia-online.de>
  */
 public class StGenerator extends EventMapping {
-    private final ArrayList<MoodleEvents> eventlist = new ArrayList<>();
-    private final HashMap<String,String> usermap = new HashMap<>();
+    private ArrayList<MoodleEvents> eventlist;
+    private HashMap<String,String> usermap;
     
+    /**
+     * constructor
+     */
+    public StGenerator() {
+        this.eventlist = new ArrayList<>();
+        this.usermap = new HashMap<>();
+    }
+    
+    /**
+     * parsing moodle event log file
+     * @param logFile 
+     */
     public void parseLogFile(File logFile) {
         CSVLogsReader logreader = new CSVLogsReader();
         eventlist.addAll(logreader.parseLogFile(logFile));
         System.out.println("Current raw events: " + eventlist.size());
     }
     
+    /**
+     * parsing user id file from moodle
+     * @param userIDFile 
+     */
     public void parseUIDFile(File userIDFile) {
         CSVLogsReader logreader = new CSVLogsReader();
         usermap.putAll(logreader.parseUserIDFile(userIDFile));

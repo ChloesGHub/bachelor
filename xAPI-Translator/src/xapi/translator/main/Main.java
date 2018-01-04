@@ -1,12 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package xapi.translator.main;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
@@ -15,9 +11,9 @@ import javafx.collections.ObservableList;
 import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -32,8 +28,8 @@ import xapi.translator.maps.XAPIStatementList;
 import xapi.translator.maps.XAPIVerbList;
 
 /**
- *
- * @author chloe
+ * main class containing javafx gui
+ * @author Chloe Lao <chloe@jia-online.de>
  */
 public class Main extends Application {
     private XAPIStatementList statementList = new XAPIStatementList();
@@ -74,6 +70,7 @@ public class Main extends Application {
         VBox menuVBox = new VBox(0);
         menuVBox.getStyleClass().add("menuVBox");
             Label menuStart = new Label("Start");
+            menuStart.setId("menuActive");
             Label menuMoodle = new Label("Moodle Log");
             Label menuXAPI = new Label("xAPI Log");
             Label menuExtract = new Label("Extraction");
@@ -83,26 +80,33 @@ public class Main extends Application {
                     menuExtract, menuOptions, menuCreate);
         mainBorderPane.setLeft(menuVBox);
         
-        //foot (buttons)
-        HBox mainButtonBox = new HBox(10.0);
-        mainButtonBox.getStyleClass().add("mainButtonBox");
-            Button nextButton = new Button("Next");
-            Button backButton = new Button("Back");
-            Button createButton = new Button("Create");
-            Button cancelButton = new Button("Cancel");
-            mainButtonBox.getChildren().addAll(nextButton, backButton,
-                    createButton, cancelButton);
-        mainBorderPane.setBottom(mainButtonBox);
-        
         //start
         getStartPage(mainBorderPane);
         
         //init
         Scene scene = new Scene(mainBorderPane);
         stage.setScene(scene);
-        scene.getStylesheets().add(GUI.class.getResource("GUI.css").toExternalForm());
+        scene.getStylesheets().add(Main.class.getResource("GUI.css").toExternalForm());
         stage.show();
         
+    }
+    
+    private VBox getVMenu(String active) {
+        LinkedHashMap<String,Label> menuMap = new LinkedHashMap<>();
+            menuMap.put("Start", new Label("Start"));
+            menuMap.put("Moodle Log", new Label("Moodle Log"));
+            menuMap.put("xAPI Log", new Label("xAPI Log"));
+            menuMap.put("Extraction", new Label("Extraction"));
+            menuMap.put("Options", new Label("Options"));
+            menuMap.put("Create", new Label("Create"));
+        Label activeLabel = menuMap.get(active);
+        activeLabel.setId("menuActive");
+        menuMap.replace(active, activeLabel);
+        
+        VBox menuVBox = new VBox(0);
+            menuVBox.getStyleClass().add("menuVBox");
+            menuMap.forEach((k,v) -> menuVBox.getChildren().add(v));
+        return menuVBox;
     }
     
     private void getStartPage(BorderPane mainPane) {
@@ -126,6 +130,7 @@ public class Main extends Application {
             });
             mainButtonBox.getChildren().addAll(nextButton, cancelButton);
         mainPane.setBottom(mainButtonBox);
+        mainPane.setLeft(getVMenu("Start"));
     }
     
     private void getMoodlePage(BorderPane mainPane) {            
@@ -229,6 +234,7 @@ public class Main extends Application {
             });
             mainButtonBox.getChildren().addAll(backButton, nextButton, cancelButton);
         mainPane.setBottom(mainButtonBox);
+        mainPane.setLeft(getVMenu("Moodle Log"));
     }
     
     private void getVerblistPage(BorderPane mainPane) {
@@ -297,6 +303,7 @@ public class Main extends Application {
             });
             mainButtonBox.getChildren().addAll(backButton, nextButton, cancelButton);
         mainPane.setBottom(mainButtonBox);
+        mainPane.setLeft(getVMenu("Moodle Log"));
     }
     
     private void getXAPIPage(BorderPane mainPane) {
@@ -364,6 +371,7 @@ public class Main extends Application {
             });
             mainButtonBox.getChildren().addAll(backButton, nextButton, cancelButton);
         mainPane.setBottom(mainButtonBox);
+        mainPane.setLeft(getVMenu("xAPI Log"));
     }
     
     private void getExtractPage(BorderPane mainPane) {
@@ -374,16 +382,10 @@ public class Main extends Application {
             
             Label entry = new Label("Extract source files");
             entry.setId("entry");
-            gpane.add(entry, 0, 0);
-
             Label inst = new Label("Click on Extract to start extraction.");
-            Label statusLabel = new Label();
-            ProgressBar pgbar = new ProgressBar(0.1);
             
+            gpane.add(entry, 0, 0);
             gpane.add(inst, 0, 1);
-            gpane.add(statusLabel, 0, 2);
-            gpane.add(pgbar, 0, 3);
-            
         mainPane.setCenter(gpane);
         
         HBox mainButtonBox = new HBox(10.0);
@@ -408,6 +410,7 @@ public class Main extends Application {
             });
             mainButtonBox.getChildren().addAll(backButton, extractButton, cancelButton);
         mainPane.setBottom(mainButtonBox);
+        mainPane.setLeft(getVMenu("Extraction"));
     }
     
     private void getOptionsPage(BorderPane mainPane) {
@@ -420,15 +423,18 @@ public class Main extends Application {
             entry.setId("entry");
             gpane.add(entry, 0, 0);
 
-            Label inst = new Label("Some options");
-            gpane.add(inst, 0, 1);
-            GridPane.setValignment(inst, VPos.TOP);
+            CheckBox sortBox = new CheckBox("Sorting by datetime");
+            //Label inst = new Label("Sorting by datetime");
+            
+            gpane.add(sortBox, 0, 1);
+            GridPane.setValignment(sortBox, VPos.TOP);
         mainPane.setCenter(gpane);
         
         HBox mainButtonBox = new HBox(10.0);
         mainButtonBox.getStyleClass().add("mainButtonBox");
             Button nextButton = new Button("Next");
             nextButton.setOnAction(e -> {
+                this.statementList.sortByDate();
                 getCreatePage(mainPane);
             });
             Button cancelButton = new Button("Cancel");
@@ -438,6 +444,7 @@ public class Main extends Application {
             });
             mainButtonBox.getChildren().addAll(nextButton, cancelButton);
         mainPane.setBottom(mainButtonBox);
+        mainPane.setLeft(getVMenu("Options"));
     }
     
     private void getCreatePage(BorderPane mainPane) {
@@ -497,6 +504,7 @@ public class Main extends Application {
             });
             mainButtonBox.getChildren().addAll(backButton, nextButton, cancelButton);
         mainPane.setBottom(mainButtonBox);
+        mainPane.setLeft(getVMenu("Create"));
     }
     
     private void getFinishPage(BorderPane mainPane) {

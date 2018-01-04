@@ -1,19 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package xapi.translator.fromCSV;
-
-/**
- *
- * @author chloe
- */
 
 import java.util.HashMap;
 import java.util.Map;
 import xapi.translator.maps.XAPIStatement;
 
+/**
+ * Class for setting xAPI-Object from moodle events
+ * @author Chloe Lao <chloe@jia-online.de>
+ */
 public class EventMapping extends XAPIStatement {
     public XAPIStatement generateContent(MoodleEvents event, XAPIStatement st) {
         switch (event.getEventname()) {

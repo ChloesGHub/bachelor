@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package xapi.translator.fromXAPI;
 
 import com.google.gson.Gson;
@@ -13,8 +8,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import org.joda.time.DateTime;
 import xapi.translator.maps.XAPIActorList;
 import xapi.translator.maps.XAPIStatement;
@@ -22,8 +15,8 @@ import xapi.translator.maps.XAPIStatementList;
 import xapi.translator.maps.XAPIVerbList;
 
 /**
- *
- * @author chloe
+ * Reader for xAPI log files
+ * @author Chloe Lao <chloe@jia-online.de>
  */
 public class XAPIReader {
     private ArrayList<Map> rawList;
@@ -32,6 +25,10 @@ public class XAPIReader {
         this.rawList = new ArrayList<>();
     }
 
+    /**
+     * parsing xAPI log file
+     * @param rawfile 
+     */
     public void parseFile(File rawfile) {
         Gson gsonreader = new Gson();
         BufferedReader reader;
@@ -52,6 +49,12 @@ public class XAPIReader {
         }
     }
     
+    /**
+     * extracting actor, verb, object, context and timestamp from a xAPI event
+     * @param statementList
+     * @param actorList
+     * @param verbList 
+     */
     public void extract(XAPIStatementList statementList, XAPIActorList actorList, XAPIVerbList verbList) {
         int counter = 0;
         for (Map statement : rawList) {
@@ -67,6 +70,10 @@ public class XAPIReader {
         System.out.printf("%d of %d xapi events extracted.", counter, rawList.size());
     }
     
+    /**
+     * check if xAPI events got parsed (rawlist empty?)
+     * @return 
+     */
     public boolean isEmpty() {
         return this.rawList.isEmpty();
     }

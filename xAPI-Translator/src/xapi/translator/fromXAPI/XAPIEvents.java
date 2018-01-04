@@ -1,16 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package xapi.translator.fromXAPI;
 
-import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 
 /**
- *
- * @author chloe
+ * POJO class for reading xAPI log files
+ * @author Chloe Lao <chloe@jia-online.de>
  */
 public class XAPIEvents {
     JsonPrimitive _id;
@@ -21,6 +15,7 @@ public class XAPIEvents {
     JsonPrimitive active;
     JsonPrimitive voided;
     JsonPrimitive timestamp;
+    JsonPrimitive updated_at;
 
     public JsonPrimitive getId() {
         return _id;
@@ -93,7 +88,4 @@ public class XAPIEvents {
     public void setUpdated_at(JsonPrimitive updated_at) {
         this.updated_at = updated_at;
     }
-    JsonPrimitive updated_at;
-    
-    
 }

@@ -1,18 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package xapi.translator.maps;
-
-/**
- *
- * @author chloe
- */
 
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Container class for xAPI verb
+ * @author Chloe Lao <chloe@jia-online.de>
+ */
 public class XAPIVerb {
     private String id;
     private HashMap<String, String> display;
@@ -43,9 +37,5 @@ public class XAPIVerb {
 
     public void addLanguage(String key, String value) {
         this.display.putIfAbsent(key, value);
-    }
-
-    public boolean isVerb(String name) {
-        return this.display.containsValue(name);
     }
 }

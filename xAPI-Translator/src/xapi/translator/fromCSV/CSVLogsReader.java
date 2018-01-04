@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package xapi.translator.fromCSV;
 
 import java.io.File;
@@ -17,11 +12,14 @@ import org.supercsv.io.CsvBeanReader;
 import org.supercsv.prefs.CsvPreference;
 
 /**
- *
- * @author chloe
+ * Reader for moodle log files
+ * @author Chloe Lao <chloe@jia-online.de>
  */
 public class CSVLogsReader {
     
+    /**
+     * Cell processor for CSVReader API
+     */
     private static final CellProcessor[] LOG_PROCESSOR = new CellProcessor[] {
         new NotNull(), //eventname
         new NotNull(), //component
@@ -45,6 +43,9 @@ public class CSVLogsReader {
         null, //realuserid
     };
     
+        /**
+     * Cell processor for CSVReader API
+     */
     private static final CellProcessor[] USERID_PROCESSOR = new CellProcessor[] {
         new NotNull(), //userid
         new NotNull() //username
@@ -67,8 +68,10 @@ public class CSVLogsReader {
             return usermap;
         } catch (FileNotFoundException ex) {
             System.out.println("User ID file file not found -> parseUserIDFile() failed.");
+            ex.printStackTrace();
         } catch (IOException ex) {
             System.out.println("IOException -> parseUserIDFile() failed.");
+            ex.printStackTrace();
         }
         return usermap;
     }
@@ -90,8 +93,10 @@ public class CSVLogsReader {
             System.out.println("Parsing from csv files completed.");
         } catch (FileNotFoundException ex) {
             System.out.println("Moodle log file not found -> parseLogFile() failed.");
+            ex.printStackTrace();
         } catch (IOException ex) {
             System.out.println("IOException -> parseLogFile() failed.");
+            ex.printStackTrace();
         }
         return eventlist;
     }

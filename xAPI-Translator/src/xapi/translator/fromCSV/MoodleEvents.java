@@ -1,19 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package xapi.translator.fromCSV;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- *
- * @author chloe
+ * (Partly) POJO class for reading moodle logs
+ * @author Chloe Lao <chloe@jia-online.de>
  */
 public class MoodleEvents {
-    
     private String eventname;
     private String component;
     private String action;
@@ -205,8 +199,12 @@ public class MoodleEvents {
         this.username = username;
     }
     
+    /**
+     * return map for adding data as xAPI-Extension
+     * @return 
+     */
     public Map toExtension() {
-        LinkedHashMap<String, String> map = new LinkedHashMap<String, String>();
+        LinkedHashMap<String, String> map = new LinkedHashMap<>();
         map.put("eventname", this.eventname);
         map.put("component", this.component);
         map.put("action", this.action);

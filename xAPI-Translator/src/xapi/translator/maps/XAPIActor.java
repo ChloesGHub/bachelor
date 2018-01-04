@@ -1,15 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package xapi.translator.maps;
 
 import java.util.Map;
 
 /**
- *
- * @author chloe
+ * Container class for xAPI actor
+ * @author Chloe Lao <chloe@jia-online.de>
  */
 public class XAPIActor {
     private String objectType;

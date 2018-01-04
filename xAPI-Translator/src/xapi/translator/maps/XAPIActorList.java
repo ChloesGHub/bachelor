@@ -10,19 +10,37 @@ import java.util.Map;
 import xapi.translator.fromCSV.MoodleEvents;
 
 /**
- *
- * @author chloe
+ * Superclass for xAPI-Actor
+ * @author Chloe Lao <chloe@jia-online.de>
  */
 public class XAPIActorList extends XAPIActor {
-    private HashMap<String, XAPIActor> actorMap = new HashMap();
+    private HashMap<String, XAPIActor> actorMap;
 
+    /**
+     * constructor
+     */
+    public XAPIActorList() {
+        this.actorMap = new HashMap<>();
+    }
+    
+    /**
+     * adding actor from moodle event to actorMap
+     * @param event
+     * @return 
+     */
     public XAPIActor addActor(MoodleEvents event) {
         XAPIActor actor = new XAPIActor();
         actor.setObjectType("Agent");
         actor.setName(event.getUsername());
+        this.actorMap.put(event.getUsername(), actor);
         return actor;
     }
 
+    /**
+     * get xAPIActor object from actorMap
+     * @param event
+     * @return 
+     */
     public XAPIActor getActor(MoodleEvents event) {
         if (!this.actorMap.containsKey(event.getUsername())) {
             return this.addActor(event);
@@ -30,6 +48,11 @@ public class XAPIActorList extends XAPIActor {
         return this.actorMap.get(event.getUsername());
     }
 
+    /**
+     * get xAPIActor object from actorMap
+     * @param user
+     * @return 
+     */
     public XAPIActor getActor(Map user) {
         String objectType = (String)user.get("objectType");
         String name = (String)user.get("name");
@@ -52,6 +75,11 @@ public class XAPIActorList extends XAPIActor {
         return actor;
     }
 
+    /**
+     * check actorMap for userid
+     * @param name
+     * @return 
+     */
     public boolean containActor(String name) {
         return this.actorMap.containsKey(name);
     }

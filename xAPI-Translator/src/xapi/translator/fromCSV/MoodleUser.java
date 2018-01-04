@@ -1,13 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package xapi.translator.fromCSV;
 
 /**
- *
- * @author chloe
+ * POJO class for reading user id file
+ * @author Chloe Lao <chloe@jia-online.de>
  */
 public class MoodleUser {
     
@@ -29,5 +24,4 @@ public class MoodleUser {
     public void setUser(String user) {
         this.user = user;
     }
-    
 }
