@@ -1,16 +1,7 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
 /* 
-    Created on : 27.12.2017, 19:31:44
-    Author     : chloe
+    Created on : 27.12.2017
+    Author     : Chloe Lao <chloe@jia-online.de>
 */
-
-.root {
-    
-}
 
 .mainTopBox {
     -fx-min-height: 70;
@@ -37,7 +28,7 @@ and open the template in the editor.
     -fx-min-width: 120;
     -fx-min-height: 30;
     -fx-padding: 0 20 0 20;
-    -fx-alignment: top-left;
+    -fx-alignment: center-left;
 }
 
 .mainButtonBox {
@@ -59,4 +50,13 @@ and open the template in the editor.
 .mainCenterBox *.listviewer {
     -fx-pref-height: 150;
     -fx-pref-width: 200;
+}
+
+#entry {
+    -fx-font-weight: bold;
+}
+
+#menuActive {
+    -fx-font-weight: bold;
+    -fx-background-color: #FFFFFF;
 }
