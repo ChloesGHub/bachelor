@@ -60,7 +60,7 @@ public class Main extends Application {
         //Top (Logo + App Name)
         HBox mainTopBox = new HBox();
         mainTopBox.getStyleClass().add("mainTopBox");
-            Label topLabel = new Label("xAPI-Translator");
+            Label topLabel = new Label("Moodle2XAPI");
             topLabel.setId("appname");
         mainTopBox.getChildren().add(topLabel);
         mainBorderPane.setTop(mainTopBox);
@@ -153,7 +153,7 @@ public class Main extends Application {
             Button addLogButton = new Button("Add file");
             addLogButton.setOnAction(e -> {
                 FileChooser fileChooser = new FileChooser();
-                fileChooser.setInitialDirectory(new File("D:\\Bachelorarbeit\\"));
+                fileChooser.setInitialDirectory(new File("."));
                 File file = fileChooser.showOpenDialog(null);
                 if (file != null) {
                     logFileList.add(file);
@@ -184,7 +184,7 @@ public class Main extends Application {
             Button addUIdButton = new Button("Add file");
             addUIdButton.setOnAction(e -> {
                 FileChooser fileChooser = new FileChooser();
-                fileChooser.setInitialDirectory(new File("D:\\Bachelorarbeit\\"));
+                fileChooser.setInitialDirectory(new File("."));
                 File file = fileChooser.showOpenDialog(null);
                 if (file != null) {
                     uIdFileList.add(file);
@@ -257,7 +257,7 @@ public class Main extends Application {
             Button addButton = new Button("Add file");
             addButton.setOnAction(e -> {
                 FileChooser fileChooser = new FileChooser();
-                fileChooser.setInitialDirectory(new File("D:\\Bachelorarbeit\\"));
+                fileChooser.setInitialDirectory(new File("."));
                 File file = fileChooser.showOpenDialog(null);
                 if (file != null) {
                     verbFileList.add(file);
@@ -326,7 +326,7 @@ public class Main extends Application {
             Button addLogButton = new Button("Add file");
             addLogButton.setOnAction(e -> {
                 FileChooser fileChooser = new FileChooser();
-                fileChooser.setInitialDirectory(new File("D:\\Bachelorarbeit\\"));
+                fileChooser.setInitialDirectory(new File("."));
                 File file = fileChooser.showOpenDialog(null);
                 if (file != null) {
                     xAPIFileList.add(file);
@@ -464,7 +464,7 @@ public class Main extends Application {
             browseButton.setOnAction(e -> {
                 FileChooser fileChooser = new FileChooser();
                 fileChooser.setTitle("Save File");
-                fileChooser.setInitialDirectory(new File("D:\\Bachelorarbeit\\"));
+                fileChooser.setInitialDirectory(new File("."));
                 fileChooser.setInitialFileName("xapi-sample.json");
                 fileChooser.getExtensionFilters().addAll(
                     new FileChooser.ExtensionFilter("JSON", "*.json"),

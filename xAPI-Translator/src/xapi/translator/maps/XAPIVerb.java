@@ -28,7 +28,7 @@ public class XAPIVerb {
     }
 
     public void setDisplay(Map display) {
-        this.display = new HashMap();
+        this.display = new HashMap<>();
         display.forEach((k, v) -> {
             this.display.put((String)k, (String)v);
         }

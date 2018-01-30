@@ -203,7 +203,7 @@ public class MoodleEvents {
      * return map for adding data as xAPI-Extension
      * @return 
      */
-    public Map toExtension() {
+    public LinkedHashMap toExtension() {
         LinkedHashMap<String, String> map = new LinkedHashMap<>();
         map.put("eventname", this.eventname);
         map.put("component", this.component);

@@ -56,7 +56,7 @@ public class CSVLogsReader {
      * @param rawfile
      * @return 
      */
-    public HashMap parseUserIDFile(File rawfile) {
+    public HashMap<String, String> parseUserIDFile(File rawfile) {
         HashMap<String, String> usermap = new HashMap<>();
         try {
             CsvBeanReader useridReader = new CsvBeanReader(new FileReader(rawfile), CsvPreference.TAB_PREFERENCE); //CSVReader
@@ -81,7 +81,7 @@ public class CSVLogsReader {
      * @param rawfile
      * @return 
      */
-    public ArrayList parseLogFile(File rawfile) {
+    public ArrayList<MoodleEvents> parseLogFile(File rawfile) {
         ArrayList<MoodleEvents> eventlist = new ArrayList<>();
         try {
             CsvBeanReader logReader = new CsvBeanReader(new FileReader(rawfile), CsvPreference.STANDARD_PREFERENCE); //CSVReader

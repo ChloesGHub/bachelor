@@ -3,6 +3,7 @@ package xapi.translator.fromCSV;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import org.joda.time.DateTime;
 import xapi.translator.maps.XAPIActorList;
@@ -83,8 +84,8 @@ public class StGenerator extends EventMapping {
      * @return 
      */
     private Map getContext(MoodleEvents event) {
-        HashMap context = new HashMap();
-        HashMap extension = new HashMap();
+        HashMap<String,HashMap> context = new HashMap<>();
+        HashMap<String,LinkedHashMap> extension = new HashMap<>();
         extension.put("moodle_standard_log", event.toExtension());
         context.put("extensions", extension);
         return context;
